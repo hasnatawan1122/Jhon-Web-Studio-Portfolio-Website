@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jhon Web Studio — WordPress & WooCommerce Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0A0E1A;
+      --surface:   #111827;
+      --surface2:  #1A2235;
+      --border:    #1E2D45;
+      --accent:    #3B82F6;
+      --accent2:   #60A5FA;
+      --text:      #E2E8F0;
+      --muted:     #94A3B8;
+      --faint:     #4B5563;
+      --display:   'Space Grotesk', sans-serif;
+      --body:      'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 68px;
+      background: rgba(10,14,26,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--display);
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo span { color: var(--accent); }
+    .logo-dot {
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50%      { opacity:.5; transform:scale(1.4); }
+    }
+    .nav-links {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: .9rem; font-weight: 500;
+      transition: color .2s;
+      cursor: pointer;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links a.active { color: var(--accent); }
+    .nav-cta {
+      background: var(--accent);
+      color: #fff !important;
+      padding: .45rem 1.1rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: background .2s !important;
+    }
+    .nav-cta:hover { background: #2563EB !important; color: #fff !important; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text); border-radius: 2px;
+      transition: all .3s;
+    }
+
+    /* ── PAGES ── */
+    .page { display: none; padding-top: 68px; }
+    .page.active { display: block; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; overflow: hidden;
+      min-height: calc(100vh - 68px);
+      display: flex; align-items: center;
+      padding: 6rem 5% 4rem;
+    }
+    #hero-canvas {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 680px; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(59,130,246,.12);
+      border: 1px solid rgba(59,130,246,.3);
+      color: var(--accent2);
+      font-size: .8rem; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .35rem .85rem; border-radius: 20px;
+      margin-bottom: 1.6rem;
+    }
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      font-weight: 700; line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero p {
+      font-size: 1.1rem; color: var(--muted);
+      max-width: 520px; margin-bottom: 2.2rem; line-height: 1.75;
+    }
+    .hero-badges {
+      display: flex; flex-wrap: wrap; gap: .7rem;
+    }
+    .badge {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .8rem; font-weight: 500;
+      padding: .35rem .9rem; border-radius: 6px;
+    }
+    .hero-visual {
+      position: absolute; right: 5%; top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+    .code-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem 1.6rem;
+      width: 300px;
+      font-family: 'Courier New', monospace;
+      font-size: .78rem; line-height: 1.8;
+      color: var(--muted);
+      box-shadow: 0 24px 64px rgba(0,0,0,.5);
+    }
+    .code-card .dots { display:flex; gap:6px; margin-bottom:1rem; }
+    .code-card .dots span {
+      width:10px; height:10px; border-radius:50%;
+    }
+    .code-card .dots span:nth-child(1){ background:#EF4444; }
+    .code-card .dots span:nth-child(2){ background:#F59E0B; }
+    .code-card .dots span:nth-child(3){ background:#10B981; }
+    .c-pink  { color:#F472B6; }
+    .c-blue  { color:#60A5FA; }
+    .c-green { color:#34D399; }
+    .c-yellow{ color:#FBBF24; }
+    .c-gray  { color:#64748B; }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 5rem 5%; }
+    .section-label {
+      font-size: .75rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: .6rem;
+    }
+    .section-title {
+      font-family: var(--display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700; line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      color: var(--muted); font-size: 1rem;
+      max-width: 520px; line-height: 1.75;
+    }
+    .section-header { margin-bottom: 3.5rem; }
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 5%;
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 2.2rem 5%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: var(--display);
+      font-size: 2rem; font-weight: 700;
+      color: var(--accent);
+    }
+    .stat-label { font-size: .85rem; color: var(--muted); margin-top: .2rem; }
+
+    /* ── SERVICES PAGE ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.4rem;
+    }
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: border-color .25s, transform .25s;
+    }
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+    .service-icon {
+      width: 48px; height: 48px;
+      background: rgba(59,130,246,.12);
+      border: 1px solid rgba(59,130,246,.25);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.2rem;
+    }
+    .service-card h3 {
+      font-family: var(--display);
+      font-size: 1.1rem; font-weight: 600;
+      margin-bottom: .6rem;
+    }
+    .service-card p { color: var(--muted); font-size: .9rem; line-height: 1.65; }
+    .service-features {
+      margin-top: 1.2rem;
+      list-style: none;
+      display: flex; flex-direction: column; gap: .4rem;
+    }
+    .service-features li {
+      font-size: .85rem; color: var(--muted);
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .service-features li::before {
+      content: '→';
+      color: var(--accent); font-weight: 700; flex-shrink: 0;
+    }
+
+    /* ── PROCESS ── */
+    .process-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      counter-reset: step;
+    }
+    .process-step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.8rem;
+      position: relative;
+    }
+    .step-num {
+      font-family: var(--display);
+      font-size: 2.5rem; font-weight: 700;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: .8rem;
+    }
+    .process-step h4 {
+      font-family: var(--display);
+      font-weight: 600; font-size: 1rem;
+      margin-bottom: .4rem;
+    }
+    .process-step p { color: var(--muted); font-size: .85rem; }
+
+    /* ── PORTFOLIO PAGE ── */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.4rem;
+    }
+    .portfolio-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color .25s, transform .25s;
+    }
+    .portfolio-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .portfolio-thumb {
+      height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .portfolio-thumb .overlay-tag {
+      position: absolute; top: 12px; left: 12px;
+      background: rgba(59,130,246,.9);
+      color: #fff; font-size: .7rem; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      padding: .25rem .65rem; border-radius: 4px;
+    }
+    .portfolio-body { padding: 1.4rem; }
+    .portfolio-body h3 {
+      font-family: var(--display);
+      font-size: 1.05rem; font-weight: 600;
+      margin-bottom: .4rem;
+    }
+    .portfolio-body p { color: var(--muted); font-size: .87rem; line-height: 1.6; margin-bottom: 1rem; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .tag {
+      font-size: .72rem; font-weight: 600;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: .2rem .55rem; border-radius: 4px;
+    }
+    .coming-soon-card {
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      height: 100%;
+      min-height: 280px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: .8rem; color: var(--faint);
+      font-size: .9rem;
+    }
+    .coming-soon-card span { font-size: 2rem; }
+
+    /* ── ABOUT PAGE ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-photo-wrap {
+      position: sticky; top: 90px;
+    }
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-photo::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(59,130,246,.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .about-name {
+      font-family: var(--display);
+      font-size: 1.05rem; font-weight: 600;
+      margin-top: 1rem; text-align: center;
+    }
+    .about-role {
+      font-size: .85rem; color: var(--accent);
+      text-align: center; margin-top: .2rem;
+    }
+    .about-body h2 {
+      font-family: var(--display);
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 700; line-height: 1.3;
+      margin-bottom: 1.2rem;
+    }
+    .about-body p {
+      color: var(--muted); line-height: 1.8;
+      margin-bottom: 1.2rem; font-size: .97rem;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: .7rem;
+      margin-top: 2rem;
+    }
+    .skill-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .65rem .9rem;
+      font-size: .83rem; font-weight: 500;
+      color: var(--text);
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .skill-chip .dot { width:7px; height:7px; background:var(--accent); border-radius:50%; flex-shrink:0; }
+
+    /* ── CONTACT PAGE ── */
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-info h2 {
+      font-family: var(--display);
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 700; margin-bottom: 1rem; line-height: 1.2;
+    }
+    .contact-info p { color: var(--muted); line-height: 1.75; margin-bottom: 2rem; }
+    .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-item {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+    }
+    .contact-item-icon {
+      width: 40px; height: 40px;
+      background: rgba(59,130,246,.12);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .contact-item-text { font-size: .9rem; }
+    .contact-item-text strong { display: block; font-weight: 600; margin-bottom: .1rem; }
+    .contact-item-text span { color: var(--muted); font-size: .85rem; }
+
+    .contact-form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.2rem;
+    }
+    .contact-form h3 {
+      font-family: var(--display);
+      font-size: 1.2rem; font-weight: 600;
+      margin-bottom: 1.6rem;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1.1rem; }
+    .form-group label { font-size: .82rem; font-weight: 600; color: var(--muted); }
+    .form-group input, .form-group textarea, .form-group select {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: var(--body);
+      font-size: .9rem;
+      padding: .7rem 1rem;
+      outline: none;
+      transition: border-color .2s;
+      width: 100%;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--accent);
+    }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-group select option { background: var(--surface); }
+    .btn-submit {
+      width: 100%;
+      background: var(--accent);
+      color: #fff; border: none;
+      border-radius: 8px; padding: .85rem;
+      font-family: var(--display);
+      font-size: .95rem; font-weight: 600;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-submit:hover { background: #2563EB; }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      color: #34D399;
+    }
+    .form-success .check { font-size: 3rem; margin-bottom: .8rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 2.4rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: var(--display);
+      font-weight: 700; font-size: 1rem;
+    }
+    .footer-logo span { color: var(--accent); }
+    footer p { color: var(--muted); font-size: .83rem; }
+    .footer-links { display: flex; gap: 1.4rem; }
+    .footer-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: .83rem; transition: color .2s;
+      cursor: pointer;
+    }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── MOBILE ── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1.4rem 5%;
+      z-index: 99;
+      flex-direction: column; gap: 1rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--muted); text-decoration: none;
+      font-size: 1rem; font-weight: 500;
+      cursor: pointer; padding: .4rem 0;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+
+    @media(max-width: 900px) {
+      .hero-visual { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-photo-wrap { position: static; }
+      .about-photo { max-height: 260px; font-size: 4rem; }
+      .contact-wrap { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .stats-bar { grid-template-columns: repeat(2,1fr); }
+    }
+    @media(max-width: 560px) {
+      .form-row { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: 1fr 1fr; }
+      section { padding: 3.5rem 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a class="nav-logo" href="#" onclick="showPage('home')">
+    <span class="logo-dot"></span>
+    Jhon <span>Web</span> Studio
+  </a>
+  <ul class="nav-links" id="nav-links">
+    <li><a onclick="showPage('home')"    id="nav-home">Home</a></li>
+    <li><a onclick="showPage('services')" id="nav-services">Services</a></li>
+    <li><a onclick="showPage('portfolio')" id="nav-portfolio">Portfolio</a></li>
+    <li><a onclick="showPage('about')"   id="nav-about">About</a></li>
+    <li><a onclick="showPage('contact')" id="nav-contact" class="nav-cta">Contact Me</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a onclick="showPage('home');toggleMenu()">Home</a>
+  <a onclick="showPage('services');toggleMenu()">Services</a>
+  <a onclick="showPage('portfolio');toggleMenu()">Portfolio</a>
+  <a onclick="showPage('about');toggleMenu()">About</a>
+  <a onclick="showPage('contact');toggleMenu()">Contact Me</a>
+</div>
+
+<!-- ════════════════════ HOME ════════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- Hero -->
+  <div class="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-eyebrow">✦ WordPress &amp; WooCommerce Developer</div>
+      <h1>Building <em>Websites</em> That Work For Your Business</h1>
+      <p>Hi, I'm Jhon — a freelance WordPress developer helping businesses and entrepreneurs launch fast, beautiful, and conversion-focused websites.</p>
+      <div class="hero-badges">
+        <span class="badge">⚡ WordPress Expert</span>
+        <span class="badge">🛒 WooCommerce Stores</span>
+        <span class="badge">📱 Mobile Responsive</span>
+        <span class="badge">🔍 SEO Ready</span>
+      </div>
+    </div>
+    <!-- Code card decoration -->
+    <div class="hero-visual">
+      <div class="code-card">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div><span class="c-gray">// jhon-web-studio</span></div>
+        <div><span class="c-pink">function</span> <span class="c-blue">buildWebsite</span><span>(client) {</span></div>
+        <div>&nbsp;&nbsp;<span class="c-pink">const</span> site = {</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;platform: <span class="c-green">'WordPress'</span>,</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;speed: <span class="c-yellow">'blazing'</span>,</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;design: <span class="c-green">'stunning'</span>,</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;seo: <span class="c-yellow">true</span></div>
+        <div>&nbsp;&nbsp;}</div>
+        <div>&nbsp;&nbsp;<span class="c-pink">return</span> site.launch();</div>
+        <div>}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num">30+</div><div class="stat-label">Projects Delivered</div></div>
+    <div class="stat-item"><div class="stat-num">25+</div><div class="stat-label">Happy Clients</div></div>
+    <div class="stat-item"><div class="stat-num">3+</div><div class="stat-label">Years Experience</div></div>
+    <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Client Satisfaction</div></div>
+  </div>
+
+  <!-- What I Do -->
+  <section>
+    <div class="section-header">
+      <div class="section-label">What I Do</div>
+      <div class="section-title">Services Built Around<br>Your Goals</div>
+      <p class="section-sub">From a simple blog to a full-scale eCommerce store, I craft WordPress solutions that are clean, fast, and easy to manage.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🌐</div>
+        <h3>WordPress Development</h3>
+        <p>Custom WordPress websites built from scratch or using premium themes, tailored to your brand identity.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🛒</div>
+        <h3>WooCommerce Stores</h3>
+        <p>Full-featured online stores with product management, payment gateways, and optimized checkout flows.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <h3>Speed Optimization</h3>
+        <p>Performance audits and optimizations to ensure your site loads fast and ranks higher on Google.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔧</div>
+        <h3>Maintenance & Support</h3>
+        <p>Ongoing maintenance, plugin updates, security monitoring, and technical support when you need it.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- Quick CTA -->
+  <section style="text-align:center; padding: 4rem 5%;">
+    <div class="section-label" style="text-align:center">Ready to Start?</div>
+    <div class="section-title" style="text-align:center; max-width:520px; margin:0 auto 1rem;">Let's Build Something<br>Great Together</div>
+    <p style="color:var(--muted);max-width:440px;margin:0 auto 2rem;">Have a project in mind? I'd love to hear about it. Let's talk about how I can help.</p>
+    <button onclick="showPage('contact')" style="background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.85rem 2rem;font-family:var(--display);font-size:.95rem;font-weight:600;cursor:pointer;transition:background .2s" onmouseover="this.style.background='#2563EB'" onmouseout="this.style.background='var(--accent)'">Get in Touch</button>
+  </section>
+
+</div>
+
+<!-- ════════════════════ SERVICES ════════════════════ -->
+<div id="page-services" class="page">
+  <section>
+    <div class="section-header">
+      <div class="section-label">Services</div>
+      <div class="section-title">What I Offer</div>
+      <p class="section-sub">Professional web development services designed to help your business grow online.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🌐</div>
+        <h3>WordPress Website Development</h3>
+        <p>End-to-end WordPress development — from design to deployment. I build websites that are beautiful, functional, and easy for you to manage.</p>
+        <ul class="service-features">
+          <li>Custom theme development</li>
+          <li>Page builder integration (Elementor, Gutenberg)</li>
+          <li>Plugin setup & configuration</li>
+          <li>Contact forms & integrations</li>
+          <li>Mobile responsive design</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🛒</div>
+        <h3>WooCommerce Store Setup</h3>
+        <p>Launch your online store with WooCommerce. I set up everything you need to start selling — from product pages to payment gateways.</p>
+        <ul class="service-features">
+          <li>Full WooCommerce setup</li>
+          <li>Product catalog & categories</li>
+          <li>Payment gateway integration</li>
+          <li>Shipping & tax configuration</li>
+          <li>Order management system</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎨</div>
+        <h3>Theme Customization</h3>
+        <p>Already have a theme but want a unique look? I customize WordPress themes to match your brand perfectly.</p>
+        <ul class="service-features">
+          <li>Brand color & font implementation</li>
+          <li>Layout adjustments</li>
+          <li>Custom CSS styling</li>
+          <li>Child theme development</li>
+          <li>Header & footer customization</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔍</div>
+        <h3>SEO & Performance</h3>
+        <p>Optimize your website for search engines and speed. I implement technical SEO best practices to help you rank higher.</p>
+        <ul class="service-features">
+          <li>On-page SEO setup (Yoast / RankMath)</li>
+          <li>Site speed optimization</li>
+          <li>Image compression & lazy loading</li>
+          <li>Caching & CDN setup</li>
+          <li>Core Web Vitals improvement</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔒</div>
+        <h3>Security & Maintenance</h3>
+        <p>Keep your website safe, updated, and running smoothly with my ongoing maintenance and security services.</p>
+        <ul class="service-features">
+          <li>WordPress core & plugin updates</li>
+          <li>Malware scanning & removal</li>
+          <li>SSL certificate setup</li>
+          <li>Daily / weekly backups</li>
+          <li>Uptime monitoring</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🚀</div>
+        <h3>Website Migration</h3>
+        <p>Moving to a new host or rebuilding your site? I handle WordPress migrations with zero downtime and no data loss.</p>
+        <ul class="service-features">
+          <li>Host-to-host migration</li>
+          <li>HTTP to HTTPS migration</li>
+          <li>URL structure migration</li>
+          <li>Database & file transfer</li>
+          <li>301 redirects setup</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- Process -->
+  <section>
+    <div class="section-header">
+      <div class="section-label">My Process</div>
+      <div class="section-title">How I Work</div>
+      <p class="section-sub">A simple, transparent process from first contact to final launch.</p>
+    </div>
+    <div class="process-list">
+      <div class="process-step">
+        <div class="step-num">01</div>
+        <h4>Discovery</h4>
+        <p>We talk about your goals, audience, and requirements. I ask the right questions to understand exactly what you need.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">02</div>
+        <h4>Planning</h4>
+        <p>I put together a clear scope, timeline, and cost estimate. No surprises — everything is agreed upfront.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">03</div>
+        <h4>Development</h4>
+        <p>I build your website with clean code and best practices. You get regular updates throughout the process.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">04</div>
+        <h4>Review</h4>
+        <p>You review the work and request any changes. I revise until you're fully satisfied with the result.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">05</div>
+        <h4>Launch</h4>
+        <p>Your site goes live. I handle deployment, final checks, and make sure everything works perfectly.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ════════════════════ PORTFOLIO ════════════════════ -->
+<div id="page-portfolio" class="page">
+  <section>
+    <div class="section-header">
+      <div class="section-label">Portfolio</div>
+      <div class="section-title">Recent Work</div>
+      <p class="section-sub">A selection of WordPress and WooCommerce projects. More client work coming soon.</p>
+    </div>
+
+    <div class="portfolio-grid">
+      <!-- Dummy Project 1 -->
+      <div class="portfolio-card">
+        <div class="portfolio-thumb" style="background:linear-gradient(135deg,#1A2235,#0F172A)">
+          🏪
+          <span class="overlay-tag">WooCommerce</span>
+        </div>
+        <div class="portfolio-body">
+          <h3>Fashion Boutique Store</h3>
+          <p>A full WooCommerce store for a clothing boutique with custom product filters, size guides, and Stripe payment integration.</p>
+          <div class="tag-row">
+            <span class="tag">WooCommerce</span>
+            <span class="tag">Elementor</span>
+            <span class="tag">Stripe</span>
+            <span class="tag">Custom Theme</span>
+          </div>
+        </div>
+      </div>
+      <!-- Dummy Project 2 -->
+      <div class="portfolio-card">
+        <div class="portfolio-thumb" style="background:linear-gradient(135deg,#1E2A1A,#0F1A0A)">
+          🌿
+          <span class="overlay-tag">WordPress</span>
+        </div>
+        <div class="portfolio-body">
+          <h3>Organic Food Brand</h3>
+          <p>A brand website for an organic food company with recipe blog, about section, and newsletter integration via Mailchimp.</p>
+          <div class="tag-row">
+            <span class="tag">WordPress</span>
+            <span class="tag">Gutenberg</span>
+            <span class="tag">Mailchimp</span>
+            <span class="tag">SEO</span>
+          </div>
+        </div>
+      </div>
+      <!-- Dummy Project 3 -->
+      <div class="portfolio-card">
+        <div class="portfolio-thumb" style="background:linear-gradient(135deg,#1A1A2E,#16213E)">
+          💼
+          <span class="overlay-tag">WordPress</span>
+        </div>
+        <div class="portfolio-body">
+          <h3>Consulting Firm Website</h3>
+          <p>Professional multi-page WordPress site for a business consulting firm, with team pages, case studies, and appointment booking.</p>
+          <div class="tag-row">
+            <span class="tag">WordPress</span>
+            <span class="tag">Astra Theme</span>
+            <span class="tag">Elementor Pro</span>
+            <span class="tag">Booking</span>
+          </div>
+        </div>
+      </div>
+      <!-- Dummy Project 4 -->
+      <div class="portfolio-card">
+        <div class="portfolio-thumb" style="background:linear-gradient(135deg,#2A1A1A,#1A0A0A)">
+          🍕
+          <span class="overlay-tag">WooCommerce</span>
+        </div>
+        <div class="portfolio-body">
+          <h3>Restaurant Online Ordering</h3>
+          <p>A WooCommerce-powered ordering system for a local restaurant chain, with table reservations and delivery zone management.</p>
+          <div class="tag-row">
+            <span class="tag">WooCommerce</span>
+            <span class="tag">Custom Dev</span>
+            <span class="tag">PayPal</span>
+            <span class="tag">Mobile First</span>
+          </div>
+        </div>
+      </div>
+      <!-- Dummy Project 5 -->
+      <div class="portfolio-card">
+        <div class="portfolio-thumb" style="background:linear-gradient(135deg,#1A2A2A,#0A1A1A)">
+          🏥
+          <span class="overlay-tag">WordPress</span>
+        </div>
+        <div class="portfolio-body">
+          <h3>Healthcare Clinic Website</h3>
+          <p>Clean and accessible WordPress site for a medical clinic with doctor profiles, services, and an online appointment system.</p>
+          <div class="tag-row">
+            <span class="tag">WordPress</span>
+            <span class="tag">Appointment Plugin</span>
+            <span class="tag">WCAG Accessible</span>
+            <span class="tag">Speed Optimized</span>
+          </div>
+        </div>
+      </div>
+      <!-- Coming Soon -->
+      <div class="coming-soon-card">
+        <span>🚧</span>
+        <strong style="color:var(--muted)">More Projects Coming</strong>
+        <p style="font-size:.82rem;text-align:center;max-width:200px">Client projects will be added here soon</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ════════════════════ ABOUT ════════════════════ -->
+<div id="page-about" class="page">
+  <section>
+    <div class="about-grid">
+      <div class="about-photo-wrap">
+        <div class="about-photo">👨‍💻</div>
+        <div class="about-name">Jhon — Web Developer</div>
+        <div class="about-role">WordPress &amp; WooCommerce Specialist</div>
+      </div>
+      <div class="about-body">
+        <div class="section-label">About Me</div>
+        <h2>I Build WordPress Websites That Make a Difference</h2>
+        <p>Hi there! I'm Jhon, a freelance WordPress developer with over 3 years of hands-on experience helping businesses and entrepreneurs establish a powerful online presence.</p>
+        <p>I started my journey as a self-taught developer, diving deep into WordPress, PHP, and WooCommerce. Over the years I've worked with clients ranging from solo entrepreneurs to growing e-commerce brands, delivering websites that are not just visually appealing but also fast, secure, and conversion-focused.</p>
+        <p>I believe a great website is more than just design — it's about building a digital asset that works hard for your business 24/7. That's why every project I take on gets my full attention, from discovery all the way to post-launch support.</p>
+        <p>When I'm not coding, you'll find me exploring new WordPress plugins, contributing to web communities, or learning the latest in web performance and SEO.</p>
+
+        <div class="section-label" style="margin-top:2.5rem">Skills & Tools</div>
+        <div class="skills-grid">
+          <div class="skill-chip"><span class="dot"></span>WordPress</div>
+          <div class="skill-chip"><span class="dot"></span>WooCommerce</div>
+          <div class="skill-chip"><span class="dot"></span>Elementor</div>
+          <div class="skill-chip"><span class="dot"></span>Gutenberg</div>
+          <div class="skill-chip"><span class="dot"></span>PHP</div>
+          <div class="skill-chip"><span class="dot"></span>HTML / CSS</div>
+          <div class="skill-chip"><span class="dot"></span>JavaScript</div>
+          <div class="skill-chip"><span class="dot"></span>MySQL</div>
+          <div class="skill-chip"><span class="dot"></span>Yoast SEO</div>
+          <div class="skill-chip"><span class="dot"></span>RankMath</div>
+          <div class="skill-chip"><span class="dot"></span>Git / GitHub</div>
+          <div class="skill-chip"><span class="dot"></span>cPanel / WHM</div>
+          <div class="skill-chip"><span class="dot"></span>Figma</div>
+          <div class="skill-chip"><span class="dot"></span>WP CLI</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ════════════════════ CONTACT ════════════════════ -->
+<div id="page-contact" class="page">
+  <section>
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <div class="section-label">Contact</div>
+        <h2>Let's Work Together</h2>
+        <p>Have a project in mind, a question, or just want to say hello? Fill out the form and I'll get back to you within 24 hours.</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item-icon">📧</div>
+            <div class="contact-item-text">
+              <strong>Email</strong>
+              <span>hello@jhonwebstudio.com</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">💬</div>
+            <div class="contact-item-text">
+              <strong>WhatsApp</strong>
+              <span>+1 (555) 000-0000</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">⏰</div>
+            <div class="contact-item-text">
+              <strong>Response Time</strong>
+              <span>Within 24 hours</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">🌍</div>
+            <div class="contact-item-text">
+              <strong>Availability</strong>
+              <span>Open to worldwide clients</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <h3>Send Me a Message</h3>
+        <div id="contact-form-inner">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="John"/>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Doe"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="john@example.com"/>
+          </div>
+          <div class="form-group">
+            <label>Service Needed</label>
+            <select>
+              <option value="">Select a service...</option>
+              <option>WordPress Website Development</option>
+              <option>WooCommerce Store Setup</option>
+              <option>Theme Customization</option>
+              <option>SEO & Performance</option>
+              <option>Maintenance & Support</option>
+              <option>Website Migration</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Your Budget</label>
+            <select>
+              <option value="">Select budget range...</option>
+              <option>Under $300</option>
+              <option>$300 – $600</option>
+              <option>$600 – $1,200</option>
+              <option>$1,200+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Tell me about your project..."></textarea>
+          </div>
+          <button class="btn-submit" onclick="submitForm()">Send Message →</button>
+        </div>
+        <div class="form-success" id="form-success">
+          <div class="check">✅</div>
+          <strong style="font-size:1.1rem;font-family:var(--display)">Message Sent!</strong>
+          <p style="color:var(--muted);margin-top:.5rem;font-size:.9rem">Thanks for reaching out. I'll get back to you within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Jhon <span>Web</span> Studio</div>
+  <p>© 2025 Jhon Web Studio. All rights reserved.</p>
+  <div class="footer-links">
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('services')">Services</a>
+    <a onclick="showPage('portfolio')">Portfolio</a>
+    <a onclick="showPage('about')">About</a>
+    <a onclick="showPage('contact')">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // ── PAGE ROUTING ──
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    const navEl = document.getElementById('nav-' + name);
+    if (navEl) navEl.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Update hash
+    history.pushState(null, '', '#' + name);
+  }
+
+  // Handle back/forward
+  window.addEventListener('popstate', () => {
+    const hash = location.hash.replace('#', '') || 'home';
+    showPage(hash);
+  });
+
+  // Load page from hash on start
+  window.addEventListener('DOMContentLoaded', () => {
+    const hash = location.hash.replace('#', '') || 'home';
+    showPage(hash);
+  });
+
+  // ── MOBILE MENU ──
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+
+  // ── FORM SUBMIT (demo) ──
+  function submitForm() {
+    document.getElementById('contact-form-inner').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+
+  // ── HERO CANVAS (dot grid) ──
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let dots = [];
+  let W, H;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+    initDots();
+  }
+
+  function initDots() {
+    dots = [];
+    const spacing = 38;
+    for (let x = 0; x < W; x += spacing) {
+      for (let y = 0; y < H; y += spacing) {
+        dots.push({
+          x, y,
+          ox: x, oy: y,
+          vx: (Math.random() - .5) * .3,
+          vy: (Math.random() - .5) * .3,
+          r: Math.random() * 1.1 + .4,
+          a: Math.random() * .25 + .06
+        });
+      }
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    dots.forEach(d => {
+      d.x += d.vx; d.y += d.vy;
+      if (Math.abs(d.x - d.ox) > 18) d.vx *= -1;
+      if (Math.abs(d.y - d.oy) > 18) d.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(59,130,246,${d.a})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+</script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+@echo off
+echo Opening Next.js Application in your default browser...
+start http://localhost:3000
