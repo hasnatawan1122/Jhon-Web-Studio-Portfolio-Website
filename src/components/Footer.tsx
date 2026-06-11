@@ -10,14 +10,15 @@ export function Footer() {
         &copy; {new Date().getFullYear()} Jhon Web Studio. All rights reserved.
       </p>
       <div className="flex gap-6">
-        <Link href="https://twitter.com" target="_blank" className="text-muted hover:text-accent transition-colors text-sm">
-          Twitter
+        {/* Replace these URLs with your actual profile links */}
+        <Link href="https://instagram.com/YOUR_USERNAME" target="_blank" className="text-muted hover:text-accent transition-colors text-sm">
+          Instagram
         </Link>
-        <Link href="https://linkedin.com" target="_blank" className="text-muted hover:text-accent transition-colors text-sm">
-          LinkedIn
+        <Link href="https://facebook.com/YOUR_USERNAME" target="_blank" className="text-muted hover:text-accent transition-colors text-sm">
+          Facebook
         </Link>
-        <Link href="https://github.com" target="_blank" className="text-muted hover:text-accent transition-colors text-sm">
-          GitHub
+        <Link href="mailto:your.email@example.com" className="text-muted hover:text-accent transition-colors text-sm">
+          Email
         </Link>
       </div>
     </footer>
