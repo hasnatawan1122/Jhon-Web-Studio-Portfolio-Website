@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="1600" viewBox="0 0 1200 1600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#7C3AED" />
+      <stop offset="100%" stop-color="#06B6D4" />
+    </linearGradient>
+    <linearGradient id="g2" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#FFF" stop-opacity="0.16" />
+      <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="1600" rx="48" fill="#0F172A" />
+
+  <!-- soft gradient shapes -->
+  <g transform="translate(80,80)">
+    <ellipse cx="420" cy="380" rx="420" ry="280" fill="url(#g1)" opacity="0.18" />
+    <ellipse cx="760" cy="920" rx="360" ry="420" fill="#F97316" opacity="0.08" />
+    <circle cx="900" cy="300" r="120" fill="#06B6D4" opacity="0.12" />
+  </g>
+
+  <!-- card for avatar -->
+  <g transform="translate(160,220)">
+    <rect width="880" height="1180" rx="36" fill="url(#g1)" opacity="0.06" />
+    <rect x="28" y="28" width="824" height="1124" rx="28" fill="#0B1220" />
+
+    <!-- stylized avatar -->
+    <g transform="translate(172,120)">
+      <circle cx="276" cy="220" r="140" fill="#0EA5A4" />
+      <circle cx="276" cy="220" r="110" fill="#061123" />
+
+      <!-- eyes / glasses -->
+      <rect x="220" y="200" width="40" height="12" rx="6" fill="#E6EEF3" />
+      <rect x="312" y="200" width="40" height="12" rx="6" fill="#E6EEF3" />
+      <rect x="260" y="204" width="40" height="6" fill="#E6EEF3" transform="rotate(8 260 204)" />
+
+      <!-- smile -->
+      <path d="M220 270 C 250 310 302 310 332 270" stroke="#9EE7E3" stroke-width="8" fill="none" stroke-linecap="round" />
+
+      <!-- code bracket icon -->
+      <path d="M50 420 L70 460 L50 500" stroke="#06B6D4" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+      <path d="M412 420 L392 460 L412 500" stroke="#7C3AED" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    </g>
+
+    <!-- accent overlay -->
+    <rect x="28" y="28" width="824" height="1124" rx="28" fill="url(#g2)" />
+  </g>
+
+  <!-- subtle top-right spark -->
+  <g transform="translate(920,40)">
+    <circle cx="0" cy="0" r="6" fill="#FDE68A" opacity="0.9" />
+    <circle cx="28" cy="20" r="4" fill="#FBBF24" opacity="0.7" />
+  </g>
+</svg>

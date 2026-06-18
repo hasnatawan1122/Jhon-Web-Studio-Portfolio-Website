@@ -12,19 +12,19 @@ export default function Home() {
       <section className="bg-surface border-y border-border py-12 px-[5%] relative z-10">
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div>
-            <div className="font-display text-4xl md:text-5xl font-bold text-accent">30+</div>
+            <div className="font-display text-4xl md:text-5xl font-bold text-accent">77+</div>
             <div className="text-sm font-medium text-muted mt-2 tracking-wide uppercase">Projects Delivered</div>
           </div>
           <div>
-            <div className="font-display text-4xl md:text-5xl font-bold text-accent">25+</div>
-            <div className="text-sm font-medium text-muted mt-2 tracking-wide uppercase">Happy Clients</div>
+            <div className="font-display text-4xl md:text-5xl font-bold text-accent">55+</div>
+            <div className="text-sm font-medium text-muted mt-2 tracking-wide uppercase">Trusted Clients</div>
           </div>
           <div>
-            <div className="font-display text-4xl md:text-5xl font-bold text-accent">3+</div>
+            <div className="font-display text-4xl md:text-5xl font-bold text-accent">7+</div>
             <div className="text-sm font-medium text-muted mt-2 tracking-wide uppercase">Years Experience</div>
           </div>
           <div>
-            <div className="font-display text-4xl md:text-5xl font-bold text-accent">100%</div>
+            <div className="font-display text-4xl md:text-5xl font-bold text-accent">98.9%</div>
             <div className="text-sm font-medium text-muted mt-2 tracking-wide uppercase">Client Satisfaction</div>
           </div>
         </div>

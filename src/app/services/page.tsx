@@ -24,8 +24,8 @@ const services = [
       {
         icon: "🏢",
         title: "Business Website",
-        desc: "Professional multi-page business websites that convert visitors into leads and showcase your services.",
-        features: ["Service pages", "Lead capture forms", "Google Maps integration", "Team pages", "Testimonial sections"],
+        desc: "Professional multi-page business websites that convert visitors into leads. Specialised in Barber Shops, Trucking Companies, Healthcare, and more.",
+        features: ["Barber Shop & Salon sites", "Trucking & Logistics sites", "Healthcare & Clinic sites", "Lead capture forms", "Service & Team pages"],
       },
       {
         icon: "🎨",
@@ -143,11 +143,39 @@ const process = [
   { step: "05", title: "Launch", desc: "Your site goes live. I handle deployment, testing, and final optimisation.", icon: "🚀" },
 ];
 
+const techTools = [
+  { name: "WordPress", icon: "⚙️", desc: "The core CMS powering flexible, scalable websites.", color: "#21759b" },
+  { name: "Elementor", icon: "🎨", desc: "Leading drag-and-drop page builder for pixel-perfect designs.", color: "#92003B" },
+  { name: "WooCommerce", icon: "🛒", desc: "Powerful e-commerce platform for online stores.", color: "#96588a" },
+  { name: "Premium Themes", icon: "✨", desc: "Fast, lightweight, and highly customisable themes like Astra and Divi.", color: "#0284c7" },
+  { name: "SEO Plugins", icon: "📈", desc: "Top-tier tools like Yoast or RankMath to boost search engine visibility.", color: "#16a34a" },
+  { name: "Performance Tools", icon: "🚀", desc: "Premium caching like WP Rocket for blazing fast load times.", color: "#ea580c" },
+];
+
 export default function Services() {
   const [activeService, setActiveService] = useState(0);
   const [activeSubService, setActiveSubService] = useState(0);
 
   const current = services[activeService];
+
+  const handleServiceClick = (index: number) => {
+    setActiveService(index);
+    setActiveSubService(0);
+    const el = document.getElementById("service-detail");
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
+  const handleSubServiceClick = (index: number) => {
+    setActiveSubService(index);
+    const el = document.getElementById("sub-service-detail");
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="min-h-screen">
@@ -210,7 +238,7 @@ export default function Services() {
           {services.map((svc, i) => (
             <button
               key={svc.id}
-              onClick={() => { setActiveService(i); setActiveSubService(0); }}
+              onClick={() => handleServiceClick(i)}
               className="group relative flex items-center gap-3 px-6 py-4 rounded-2xl border font-semibold text-sm transition-all duration-500 overflow-hidden"
               style={{
                 borderColor: activeService === i ? `${svc.color}60` : "var(--border)",
@@ -242,7 +270,7 @@ export default function Services() {
       </section>
 
       {/* ═══ Active Service Detail ═══ */}
-      <section className="px-[5%] py-12 max-w-7xl mx-auto">
+      <section className="px-[5%] py-12 max-w-7xl mx-auto" id="service-detail">
         {/* Service Header */}
         <div
           className="relative rounded-3xl border p-8 md:p-12 mb-10 overflow-hidden transition-all duration-700"
@@ -303,7 +331,7 @@ export default function Services() {
           {current.subServices.map((sub, i) => (
             <div
               key={i}
-              onClick={() => setActiveSubService(i)}
+              onClick={() => handleSubServiceClick(i)}
               className="group relative cursor-pointer rounded-2xl border p-6 transition-all duration-400 overflow-hidden"
               style={{
                 borderColor: activeSubService === i ? `${current.color}60` : "var(--border)",
@@ -357,6 +385,7 @@ export default function Services() {
 
         {/* Expanded Sub-service Details */}
         <div
+          id="sub-service-detail"
           className="rounded-3xl border p-8 md:p-10 transition-all duration-500 overflow-hidden"
           style={{
             borderColor: `${current.color}30`,
@@ -431,7 +460,7 @@ export default function Services() {
                   borderColor: `${svc.color}25`,
                   backgroundColor: "var(--bg)",
                 }}
-                onClick={() => { setActiveService(si); setActiveSubService(0); }}
+                onClick={() => handleServiceClick(si)}
               >
                 <div
                   className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-5"
@@ -499,6 +528,44 @@ export default function Services() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ═══ Tools and Technologies ═══ */}
+      <section className="px-[5%] pb-20 pt-10 max-w-7xl mx-auto border-t border-border mt-10">
+        <div className="text-center mb-14">
+          <div className="text-xs font-bold tracking-[0.15em] uppercase text-accent mb-2">My Tech Stack</div>
+          <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Tools and Technologies Used</h2>
+          <p className="text-muted text-lg max-w-xl mx-auto">
+            I use industry-leading tools and technologies to ensure your WordPress website is fast, secure, and easy to manage.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {techTools.map((tool, i) => (
+            <div
+              key={i}
+              className="group relative rounded-2xl border p-6 bg-surface transition-all duration-500 hover:-translate-y-2 overflow-hidden shadow-sm hover:shadow-xl"
+              style={{ borderColor: `${tool.color}30` }}
+            >
+              {/* Glow effect on hover */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none"
+                style={{ background: `radial-gradient(circle at center, ${tool.color} 0%, transparent 70%)` }}
+              />
+              
+              <div className="flex items-center gap-4 mb-4 relative z-10">
+                <div
+                  className="w-14 h-14 rounded-xl flex items-center justify-center text-3xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-inner"
+                  style={{ backgroundColor: `${tool.color}15`, border: `1px solid ${tool.color}40` }}
+                >
+                  {tool.icon}
+                </div>
+                <h3 className="font-display text-xl font-bold transition-colors" style={{ color: tool.color }}>{tool.name}</h3>
+              </div>
+              <p className="text-muted text-sm leading-relaxed relative z-10 group-hover:text-text transition-colors">{tool.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 

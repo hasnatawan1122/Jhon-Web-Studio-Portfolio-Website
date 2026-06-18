@@ -11,10 +11,10 @@ export function Footer() {
       </p>
       <div className="flex gap-6">
         {/* Replace these URLs with your actual profile links */}
-        <Link href="https://instagram.com/YOUR_USERNAME" target="_blank" className="text-muted hover:text-accent transition-colors text-sm">
+        <Link href="https://www.instagram.com/web_tech_develpoers/?hl=en" target="_blank" className="text-muted hover:text-accent transition-colors text-sm">
           Instagram
         </Link>
-        <Link href="https://facebook.com/YOUR_USERNAME" target="_blank" className="text-muted hover:text-accent transition-colors text-sm">
+        <Link href="https://web.facebook.com/profile.php?id=61575062536644" target="_blank" className="text-muted hover:text-accent transition-colors text-sm">
           Facebook
         </Link>
         <Link href="mailto:your.email@example.com" className="text-muted hover:text-accent transition-colors text-sm">

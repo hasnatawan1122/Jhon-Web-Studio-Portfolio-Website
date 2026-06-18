@@ -15,11 +15,11 @@ const SLIDES = [
       <>
         Building{" "}
         <em className="not-italic text-accent">Websites</em>{" "}
-        That Work For Your Business
+        That Helps Your Business Grow Online
       </>
     ),
     intro:
-      "Hi, I'm Jhon — a freelance WordPress developer helping businesses and entrepreneurs launch fast, beautiful, and conversion-focused websites.",
+      " Focusing on developing business online presence through their personal website for their business !",
     cta: { label: "Start Your Project", href: "/contact" },
     accent: "#3b82f6",
   },
@@ -28,13 +28,13 @@ const SLIDES = [
     badge: "⚡ Full-Stack WordPress Expert",
     heading: (
       <>
-        Crafting{" "}
-        <em className="not-italic text-sky-400">Clean Code</em>{" "}
+        Developing{" "}
+        <em className="not-italic text-sky-400">Clean Websites</em>{" "}
         For Powerful Digital Experiences
       </>
     ),
     intro:
-      "From pixel-perfect themes to high-performance plugins, I write maintainable WordPress code that scales with your ambitions and keeps your site running at peak speed.",
+      "From pixel-perfect themes to high-performance plugins, I Develop WordPress sites that scales with your ambitions and keeps your site running at peak speed.",
     cta: { label: "View My Work", href: "/portfolio" },
     accent: "#38bdf8",
   },
@@ -44,12 +44,12 @@ const SLIDES = [
     heading: (
       <>
         Launch Your{" "}
-        <em className="not-italic text-amber-400">eCommerce</em>{" "}
+        <em className="not-italic text-amber-400">E-Commerce</em>{" "}
         Store & Start Selling Today
       </>
     ),
     intro:
-      "I build feature-rich WooCommerce stores with smooth checkout flows, payment gateway integrations, and inventory management — turning visitors into loyal customers.",
+      "I build feature-rich WooCommerce stores with smooth checkout flows, payment gateway integrations, and inventory management that helps in turning visitors into loyal customers.",
     cta: { label: "Explore Services", href: "/services" },
     accent: "#f59e0b",
   },
