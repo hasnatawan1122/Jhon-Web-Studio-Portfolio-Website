@@ -28,7 +28,7 @@ export default function Contact() {
               </div>
               <div>
                 <strong className="block text-sm font-semibold">Phone no</strong>
-                <span className="text-sm text-muted">+123345677897</span>
+                <span className="text-sm text-muted">+1 9295977759</span>
               </div>
             </div>
 

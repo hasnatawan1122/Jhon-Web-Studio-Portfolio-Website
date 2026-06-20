@@ -137,7 +137,7 @@ export default function PrivacyPolicy() {
           <li>Email: <a href="mailto:jhonmathewjhon@gmail.com" className="text-accent hover:underline">jhonmathewjhon@gmail.com</a></li>
           <li>Instagram: <a href="https://www.instagram.com/web_tech_develpoers/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">https://www.instagram.com/web_tech_develpoers/</a></li>
           <li>FaceBook: <a href="https://web.facebook.com/profile.php?id=61575062536644" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">https://web.facebook.com/profile</a></li>
-          <li>Phone no: <a href="tel:+123345677897" className="text-accent hover:underline">+123345677897</a></li>
+          <li>Phone no: <a href="tel: +1 9295977759" className="text-accent hover:underline">+123345677897</a></li>
         </ul>
         <p className="pt-4">We will make reasonable efforts to respond to your inquiry in a timely manner.</p>
       </div>
